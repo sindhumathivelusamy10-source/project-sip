@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlexZone — Member Portal</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===================== AUTH SCREEN ===================== -->
+<div class="auth-wrap" id="authWrap">
+  <div class="auth-card">
+    <div class="brand" style="margin-bottom:22px;">
+      <div class="brand-mark">F</div>
+      <div class="brand-name">FLEX<span>ZONE</span></div>
+    </div>
+    <div class="auth-tabs">
+      <div class="auth-tab active" data-tab="login">Log In</div>
+      <div class="auth-tab" data-tab="register">Join Now</div>
+    </div>
+
+    <form class="auth-form active" id="loginForm">
+      <label>Email</label>
+      <input type="email" id="loginEmail" required placeholder="ravi@example.com">
+      <label>Password</label>
+      <input type="password" id="loginPassword" required placeholder="••••••••">
+      <button class="btn btn-primary btn-block" type="submit">Log In</button>
+      <p class="demo-hint">Demo member: ravi@example.com / member123</p>
+    </form>
+
+    <form class="auth-form" id="registerForm">
+      <label>Full Name</label>
+      <input type="text" id="regName" required placeholder="Your name">
+      <div class="field-row">
+        <div><label>Email</label><input type="email" id="regEmail" required placeholder="you@example.com"></div>
+        <div><label>Phone</label><input type="text" id="regPhone" placeholder="9xxxxxxxxx"></div>
+      </div>
+      <label>Password</label>
+      <input type="password" id="regPassword" required placeholder="At least 6 characters">
+      <div class="field-row">
+        <div>
+          <label>Branch</label>
+          <select id="regBranch" required></select>
+        </div>
+        <div>
+          <label>Plan</label>
+          <select id="regPlan" required></select>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Create Account &amp; Pay</button>
+      <p class="demo-hint">Payment is simulated instantly for this demo.</p>
+    </form>
+  </div>
+</div>
+
+<!-- ===================== APP SHELL ===================== -->
+<div class="app-shell" id="appShell" style="display:none;">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">F</div>
+      <div class="brand-name">FLEX<span>ZONE</span></div>
+    </div>
+
+    <div class="nav-group">
+      <span class="nav-label">Overview</span>
+      <div class="nav-item active" data-view="dashboard"><span class="dot"></span>Dashboard</div>
+      <div class="nav-item" data-view="notifications"><span class="dot"></span>Notifications</div>
+    </div>
+
+    <div class="nav-group">
+      <span class="nav-label">Train</span>
+      <div class="nav-item" data-view="schedule"><span class="dot"></span>Class Schedule</div>
+      <div class="nav-item" data-view="bookings"><span class="dot"></span>My Bookings</div>
+      <div class="nav-item" data-view="workout"><span class="dot"></span>Workout Plans</div>
+      <div class="nav-item" data-view="nutrition"><span class="dot"></span>Nutrition Plans</div>
+      <div class="nav-item" data-view="progress"><span class="dot"></span>Progress Tracker</div>
+    </div>
+
+    <div class="nav-group">
+      <span class="nav-label">Account</span>
+      <div class="nav-item" data-view="checkin"><span class="dot"></span>QR Check-In</div>
+      <div class="nav-item" data-view="locker"><span class="dot"></span>Locker</div>
+      <div class="nav-item" data-view="billing"><span class="dot"></span>Billing &amp; Plan</div>
+      <div class="nav-item" data-view="profile"><span class="dot"></span>Profile</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-item" id="logoutBtn"><span class="dot"></span>Log Out</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title">
+        <button class="btn btn-outline mobile-toggle btn-sm" id="mobileToggle">☰</button>
+        <h1 id="viewTitle">Dashboard</h1>
+        <p id="viewSubtitle">Welcome back, let's get moving.</p>
+      </div>
+    </div>
+
+    <!-- ---------- DASHBOARD ---------- -->
+    <section class="view active" id="view-dashboard">
+      <div class="scoreboard" id="memberScoreboard"></div>
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="card-head"><h3>Membership Status</h3><span class="badge" id="dashPlanBadge"></span></div>
+          <div id="dashPlanInfo" class="muted">Loading…</div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Upcoming Classes</h3></div>
+          <div id="dashUpcoming"><p class="muted">Loading…</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- NOTIFICATIONS ---------- -->
+    <section class="view" id="view-notifications">
+      <div class="card">
+        <div class="card-head"><h3>Recent Notifications</h3></div>
+        <div id="notifList"><p class="muted">Loading…</p></div>
+      </div>
+    </section>
+
+    <!-- ---------- SCHEDULE / BOOKING ---------- -->
+    <section class="view" id="view-schedule">
+      <div class="filter-bar">
+        <select id="filterDay">
+          <option value="">All Days</option>
+          <option>Monday</option><option>Tuesday</option><option>Wednesday</option>
+          <option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option>
+        </select>
+        <select id="filterCategory">
+          <option value="">All Categories</option>
+        </select>
+        <select id="filterTrainer"><option value="">All Trainers</option></select>
+        <input type="date" id="bookDate" style="margin-bottom:0; width:auto;">
+      </div>
+      <div id="scheduleList"><p class="muted">Loading classes…</p></div>
+    </section>
+
+    <!-- ---------- MY BOOKINGS ---------- -->
+    <section class="view" id="view-bookings">
+      <div class="card">
+        <div class="card-head"><h3>My Bookings</h3></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Class</th><th>Date</th><th>Time</th><th>Trainer</th><th>Status</th><th></th></tr></thead>
+            <tbody id="bookingsTable"><tr><td colspan="6" class="muted">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- WORKOUT PLANS ---------- -->
+    <section class="view" id="view-workout">
+      <div id="workoutList" class="grid cols-2"><p class="muted">Loading…</p></div>
+    </section>
+
+    <!-- ---------- NUTRITION PLANS ---------- -->
+    <section class="view" id="view-nutrition">
+      <div id="nutritionList" class="grid cols-2"><p class="muted">Loading…</p></div>
+    </section>
+
+    <!-- ---------- PROGRESS TRACKER ---------- -->
+    <section class="view" id="view-progress">
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="card-head"><h3>Log Today's Stats</h3></div>
+          <form id="progressForm">
+            <label>Date</label>
+            <input type="date" id="pLogDate" required>
+            <div class="field-row">
+              <div><label>Weight (kg)</label><input type="number" step="0.1" id="pWeight"></div>
+              <div><label>Body Fat (%)</label><input type="number" step="0.1" id="pBodyFat"></div>
+            </div>
+            <label>Notes</label>
+            <textarea id="pNotes" placeholder="How did today's session feel?"></textarea>
+            <button class="btn btn-primary btn-block" type="submit">Save Log</button>
+          </form>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Weight Trend</h3></div>
+          <div id="progressChart"><p class="muted">No data yet.</p></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:18px;">
+        <div class="card-head"><h3>History</h3></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Date</th><th>Weight</th><th>Body Fat</th><th>Notes</th></tr></thead>
+            <tbody id="progressTable"><tr><td colspan="4" class="muted">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- QR CHECK-IN ---------- -->
+    <section class="view" id="view-checkin">
+      <div class="card" style="max-width:420px;">
+        <div class="card-head"><h3>Your Check-In Code</h3></div>
+        <div class="qr-box">
+          <img id="qrImage" alt="QR Code" width="220" height="220">
+          <p class="muted" style="text-align:center;">Show this code at the front desk scanner to check in.</p>
+        </div>
+      </div>
+      <div class="card" style="max-width:420px; margin-top:18px;">
+        <div class="card-head"><h3>Recent Check-Ins</h3></div>
+        <div id="checkinHistory"><p class="muted">Loading…</p></div>
+      </div>
+    </section>
+
+    <!-- ---------- LOCKER ---------- -->
+    <section class="view" id="view-locker">
+      <div class="card">
+        <div class="card-head">
+          <h3>Locker Assignment</h3>
+          <span id="myLockerBadge" class="badge badge-info">None assigned</span>
+        </div>
+        <p class="muted">Tap an available locker to claim it. Only one locker per member.</p>
+        <div class="locker-grid" id="lockerGrid"></div>
+      </div>
+    </section>
+
+    <!-- ---------- BILLING ---------- -->
+    <section class="view" id="view-billing">
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="card-head"><h3>Current Plan</h3></div>
+          <div id="billingPlanInfo" class="muted">Loading…</div>
+          <div class="divider"></div>
+          <div class="flex">
+            <button class="btn btn-primary" id="renewBtn">Renew Now</button>
+            <button class="btn btn-danger" id="cancelBtn">Cancel &amp; Refund</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Payment History</h3></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Date</th><th>Type</th><th>Amount</th><th>Status</th></tr></thead>
+              <tbody id="paymentsTable"><tr><td colspan="4" class="muted">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- PROFILE ---------- -->
+    <section class="view" id="view-profile">
+      <div class="card" style="max-width:480px;">
+        <div class="card-head"><h3>My Profile</h3></div>
+        <div id="profileInfo" class="muted">Loading…</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
