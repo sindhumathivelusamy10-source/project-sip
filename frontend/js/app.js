@@ -1,7 +1,3 @@
-// ===============================
-// FLEXZONE - DAY 1 FRONTEND DEMO
-// ===============================
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const authWrap = document.getElementById("authWrap");
@@ -13,120 +9,239 @@ document.addEventListener("DOMContentLoaded", () => {
     const navItems = document.querySelectorAll(".nav-item");
     const views = document.querySelectorAll(".view");
 
-    // -------------------------------
     // LOGIN
-    // -------------------------------
     loginForm.addEventListener("submit", function(e) {
         e.preventDefault();
 
-        authWrap.style.display = "none";
-        appShell.style.display = "flex";
+        const email = document.getElementById("loginEmail").value;
+        const password = document.getElementById("loginPassword").value;
 
-        document.getElementById("viewTitle").textContent = "Dashboard";
-        document.getElementById("viewSubtitle").textContent =
-            "Welcome to FlexZone Gym Management System";
+        if (
+            (email === "sindhumathi@gmail.com" && password === "123456") ||
+            (email === "ravi@example.com" && password === "member123")
+        ) {
+
+            authWrap.style.display = "none";
+            appShell.style.display = "flex";
+
+            loadDashboard(email);
+
+        } else {
+            alert("Invalid Email or Password");
+        }
     });
 
-    // -------------------------------
     // REGISTER
-    // -------------------------------
-    registerForm.addEventListener("submit", function(e) {
-        e.preventDefault();
+    if(registerForm){
+        registerForm.addEventListener("submit", function(e){
+            e.preventDefault();
 
-        alert("Registration Successful (Demo Mode)");
+            alert("Registration Successful");
 
-        authWrap.style.display = "none";
-        appShell.style.display = "flex";
-    });
+            authWrap.style.display = "none";
+            appShell.style.display = "flex";
 
-    // -------------------------------
+            loadDashboard("newuser@gmail.com");
+        });
+    }
+
+    // LOGOUT
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    if(logoutBtn){
+        logoutBtn.addEventListener("click", () => {
+            appShell.style.display = "none";
+            authWrap.style.display = "flex";
+        });
+    }
+
     // SIDEBAR NAVIGATION
-    // -------------------------------
     navItems.forEach(item => {
+
         item.addEventListener("click", () => {
 
-            if(item.id === "logoutBtn"){
-                appShell.style.display = "none";
-                authWrap.style.display = "flex";
-                return;
-            }
+            const view = item.dataset.view;
+
+            if(!view) return;
 
             navItems.forEach(i => i.classList.remove("active"));
             item.classList.add("active");
 
-            const view = item.dataset.view;
-
             views.forEach(v => v.classList.remove("active"));
 
-            const selectedView =
+            const selected =
                 document.getElementById(`view-${view}`);
 
-            if(selectedView){
-                selectedView.classList.add("active");
-
-                document.getElementById("viewTitle").textContent =
-                    item.textContent.trim();
-
-                document.getElementById("viewSubtitle").textContent =
-                    "Frontend Demo Version";
+            if(selected){
+                selected.classList.add("active");
             }
+
+            document.getElementById("viewTitle").textContent =
+                item.textContent.trim();
+
         });
+
     });
 
-    // -------------------------------
-    // DASHBOARD SAMPLE DATA
-    // -------------------------------
-    const scoreboard =
-        document.getElementById("memberScoreboard");
+    // DASHBOARD FUNCTION
+    function loadDashboard(email){
 
-    if(scoreboard){
-        scoreboard.innerHTML = `
-            <div class="stat-card">
-                <h2>12</h2>
-                <p>Classes Attended</p>
+        const name =
+            email === "sindhumathi@gmail.com"
+            ? "Sindhumathi Velusamy"
+            : "Ravi Kumar";
+
+        // Scoreboard
+        document.getElementById("memberScoreboard").innerHTML = `
+            <div class="stat">
+                <span class="num">12</span>
+                <span class="label">Classes Attended</span>
             </div>
 
-            <div class="stat-card">
-                <h2>8</h2>
-                <p>Bookings</p>
+            <div class="stat cyan">
+                <span class="num">8</span>
+                <span class="label">Bookings</span>
             </div>
 
-            <div class="stat-card">
-                <h2>72kg</h2>
-                <p>Current Weight</p>
+            <div class="stat coral">
+                <span class="num">72 KG</span>
+                <span class="label">Current Weight</span>
             </div>
 
-            <div class="stat-card">
-                <h2>Elite Plan</h2>
-                <p>Membership</p>
+            <div class="stat">
+                <span class="num">Elite Plan</span>
+                <span class="label">Membership</span>
             </div>
         `;
-    }
 
-    // Membership details
-    const planInfo =
-        document.getElementById("dashPlanInfo");
+        // Membership
+        document.getElementById("dashPlanBadge").textContent =
+            "Elite Membership";
 
-    if(planInfo){
-        planInfo.innerHTML = `
+        document.getElementById("dashPlanInfo").innerHTML = `
+            <p><strong>Name:</strong> ${name}</p>
             <p><strong>Plan:</strong> Elite Membership</p>
             <p><strong>Status:</strong> Active</p>
             <p><strong>Valid Until:</strong> 31 Dec 2026</p>
         `;
-    }
 
-    // Upcoming classes
-    const upcoming =
-        document.getElementById("dashUpcoming");
-
-    if(upcoming){
-        upcoming.innerHTML = `
+        // Upcoming Classes
+        document.getElementById("dashUpcoming").innerHTML = `
             <ul>
                 <li>Yoga - Monday - 6:00 AM</li>
                 <li>Cardio Blast - Wednesday - 7:00 AM</li>
                 <li>Strength Training - Friday - 6:30 PM</li>
+                <li>Zumba - Saturday - 8:00 AM</li>
             </ul>
         `;
-    }
 
+        // Notifications
+        document.getElementById("notifList").innerHTML = `
+            <p>Membership renewed successfully.</p>
+            <p>Yoga class booked for Monday.</p>
+            <p>Congratulations! 12 classes completed.</p>
+        `;
+
+        // Schedule
+        document.getElementById("scheduleList").innerHTML = `
+            <div class="card">
+                <h3>Yoga</h3>
+                <p>Monday - 6:00 AM</p>
+            </div>
+
+            <div class="card">
+                <h3>Cardio Blast</h3>
+                <p>Wednesday - 7:00 AM</p>
+            </div>
+
+            <div class="card">
+                <h3>Strength Training</h3>
+                <p>Friday - 6:30 PM</p>
+            </div>
+        `;
+
+        // Bookings
+        document.getElementById("bookingsTable").innerHTML = `
+            <tr>
+                <td>Yoga</td>
+                <td>21 Jul 2026</td>
+                <td>6:00 AM</td>
+                <td>Priya Sharma</td>
+                <td>Confirmed</td>
+                <td>-</td>
+            </tr>
+
+            <tr>
+                <td>Cardio Blast</td>
+                <td>23 Jul 2026</td>
+                <td>7:00 AM</td>
+                <td>Rahul Kumar</td>
+                <td>Confirmed</td>
+                <td>-</td>
+            </tr>
+        `;
+
+        // Workout
+        document.getElementById("workoutList").innerHTML = `
+            <div class="card">
+                <h3>Workout Plan</h3>
+                <p>Monday - Chest & Triceps</p>
+                <p>Tuesday - Back & Biceps</p>
+                <p>Wednesday - Cardio</p>
+                <p>Thursday - Legs</p>
+                <p>Friday - Shoulders</p>
+            </div>
+        `;
+
+        // Nutrition
+        document.getElementById("nutritionList").innerHTML = `
+            <div class="card">
+                <h3>Nutrition Plan</h3>
+                <p>Breakfast - Oats and Milk</p>
+                <p>Lunch - Rice and Chicken</p>
+                <p>Dinner - Salad and Protein Shake</p>
+            </div>
+        `;
+
+        // Progress
+        document.getElementById("progressTable").innerHTML = `
+            <tr>
+                <td>01 Jan 2026</td>
+                <td>78 KG</td>
+                <td>22%</td>
+                <td>Started Journey</td>
+            </tr>
+
+            <tr>
+                <td>01 Jul 2026</td>
+                <td>72 KG</td>
+                <td>18%</td>
+                <td>Great Progress</td>
+            </tr>
+        `;
+
+        // Billing
+        document.getElementById("billingPlanInfo").innerHTML = `
+            <p><strong>Plan:</strong> Elite Membership</p>
+            <p><strong>Amount:</strong> ₹12,000</p>
+            <p><strong>Status:</strong> Paid</p>
+        `;
+
+        document.getElementById("paymentsTable").innerHTML = `
+            <tr>
+                <td>01 Jan 2026</td>
+                <td>Membership Fee</td>
+                <td>₹12,000</td>
+                <td>Paid</td>
+            </tr>
+        `;
+
+        // Profile
+        document.getElementById("profileInfo").innerHTML = `
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Phone:</strong> 9876543210</p>
+            <p><strong>Membership:</strong> Elite Membership</p>
+        `;
+    }
 });
