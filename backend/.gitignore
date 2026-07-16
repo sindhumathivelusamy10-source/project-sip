@@ -1,0 +1,5 @@
+node_modules/
+db/gym.db
+db/gym.db-wal
+db/gym.db-shm
+.env
