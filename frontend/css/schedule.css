@@ -1,0 +1,333 @@
+/* ===========================
+   GOOGLE FONT
+=========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f7fc;
+    color:#333;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 40px;
+    background:#0f172a;
+    color:#fff;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo h1{
+    font-size:28px;
+    font-weight:700;
+}
+
+.dashboard-btn{
+    background:#3b82f6;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+}
+
+.dashboard-btn:hover{
+    background:#2563eb;
+}
+
+/* ===========================
+   TITLE
+=========================== */
+
+.title-section{
+    text-align:center;
+    margin:40px 20px;
+}
+
+.title-section h2{
+    font-size:34px;
+    color:#1e293b;
+}
+
+.title-section p{
+    margin-top:10px;
+    color:#64748b;
+    font-size:18px;
+}
+/* ===========================
+   SEARCH
+=========================== */
+
+.filter-section{
+
+    width:90%;
+    margin:auto;
+
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+
+}
+
+.filter-section input{
+
+    width:320px;
+
+    padding:14px;
+
+    border:1px solid #ccc;
+
+    border-radius:10px;
+
+    outline:none;
+
+    font-size:16px;
+
+}
+
+.filter-section select{
+
+    width:240px;
+
+    padding:14px;
+
+    border-radius:10px;
+
+    border:1px solid #ccc;
+
+    font-size:16px;
+
+}
+.schedule-container{
+
+    width:95%;
+    margin:40px auto;
+
+}
+
+.day-title{
+
+    margin:40px 0 20px;
+
+    color:#2563eb;
+
+    border-left:6px solid #2563eb;
+
+    padding-left:12px;
+
+}
+
+.card-container{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+    gap:25px;
+
+}
+.class-card{
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.class-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+}
+
+.class-card h3{
+
+    color:#1e40af;
+
+    margin-bottom:15px;
+
+}
+
+.class-card p{
+
+    margin:10px 0;
+
+    font-size:15px;
+
+}
+.book-btn{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.book-btn:hover{
+
+    background:#1d4ed8;
+
+}
+.booking-section{
+
+    width:95%;
+
+    margin:60px auto;
+
+}
+
+.booking-section h2{
+
+    margin-bottom:20px;
+
+    color:#1e40af;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+table th{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:16px;
+
+}
+
+table td{
+
+    padding:15px;
+
+    text-align:center;
+
+    border-bottom:1px solid #ddd;
+
+}
+
+tr:hover{
+
+    background:#f9fafb;
+
+}
+@media(max-width:768px){
+
+.header{
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+.title-section h2{
+
+    font-size:28px;
+
+}
+
+.filter-section{
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+.filter-section input,
+
+.filter-section select{
+
+    width:100%;
+
+}
+
+.card-container{
+
+    grid-template-columns:1fr;
+
+}
+
+table{
+
+    font-size:14px;
+
+}
+
+}
+.cancel-btn{
+
+    background:#ef4444;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.cancel-btn:hover{
+
+    background:#dc2626;
+
+}

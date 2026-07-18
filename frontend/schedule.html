@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Gym Class Schedule</title>
+
+    <link rel="stylesheet"
+          href="../css/schedule.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <h1>
+            <i class="fa-solid fa-dumbbell"></i>
+            FitZone Gym
+        </h1>
+
+    </div>
+
+    <div class="header-buttons">
+
+        <button class="dashboard-btn"
+                onclick="window.location.href='dashboard.html'">
+
+            <i class="fa-solid fa-house"></i>
+
+            Dashboard
+
+        </button>
+
+    </div>
+
+</header>
+
+<!-- ================= TITLE ================= -->
+
+<section class="title-section">
+
+    <h2>Weekly Gym Class Schedule</h2>
+
+    <p>
+
+        Book your favourite fitness class and stay healthy.
+
+    </p>
+
+</section>
+
+<!-- ================= SEARCH ================= -->
+
+<section class="filter-section">
+
+    <input
+        type="text"
+        id="searchBox"
+        placeholder="Search Class..."
+        onkeyup="searchClass()">
+
+    <select
+        id="trainerFilter"
+        onchange="filterTrainer()">
+
+        <option value="">All Trainers</option>
+
+        <option value="Priya Sharma">
+            Priya Sharma
+        </option>
+
+        <option value="Rahul Kumar">
+            Rahul Kumar
+        </option>
+
+        <option value="Arjun Singh">
+            Arjun Singh
+        </option>
+
+        <option value="Neha Patel">
+            Neha Patel
+        </option>
+
+        <option value="Vikram Singh">
+            Vikram Singh
+        </option>
+
+        <option value="Anjali Mehta">
+            Anjali Mehta
+        </option>
+
+    </select>
+
+</section>
+
+<!-- ================= CLASS CONTAINER ================= -->
+
+<div class="schedule-container">
+
+<!-- ================= MONDAY ================= -->
+
+<h2 class="day-title">
+
+Monday
+
+</h2>
+
+<div class="card-container">
+
+<div class="class-card">
+
+<h3>🧘 Yoga</h3>
+
+<p><strong>Time:</strong> 6:00 AM - 7:00 AM</p>
+
+<p><strong>Trainer:</strong> Priya Sharma</p>
+
+<p>
+
+Seats :
+
+<span id="seat1">
+
+20/20
+
+</span>
+
+</p>
+
+<button
+
+class="book-btn"
+
+onclick="bookClass(
+'Monday',
+'Yoga',
+'6:00 AM - 7:00 AM',
+'Priya Sharma',
+'seat1'
+)">
+
+Book Now
+
+</button>
+
+</div>
+
+<div class="class-card">
+
+<h3>💪 Weight Training</h3>
+
+<p><strong>Time:</strong> 8:00 AM - 9:00 AM</p>
+
+<p><strong>Trainer:</strong> Arjun Singh</p>
+
+<p>
+
+Seats :
+
+<span id="seat2">
+
+20/20
+
+</span>
+
+</p>
+
+<button
+
+class="book-btn"
+
+onclick="bookClass(
+'Monday',
+'Weight Training',
+'8:00 AM - 9:00 AM',
+'Arjun Singh',
+'seat2'
+)">
+
+Book Now
+
+</button>
+
+</div>
+
+<div class="class-card">
+
+<h3>🏃 Cardio</h3>
+
+<p><strong>Time:</strong> 6:00 PM - 7:00 PM</p>
+
+<p><strong>Trainer:</strong> Rahul Kumar</p>
+
+<p>
+
+Seats :
+
+<span id="seat3">
+
+20/20
+
+</span>
+
+</p>
+
+<button
+
+class="book-btn"
+
+onclick="bookClass(
+'Monday',
+'Cardio',
+'6:00 PM - 7:00 PM',
+'Rahul Kumar',
+'seat3'
+)">
+
+Book Now
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ================= TUESDAY ================= -->
+
+<h2 class="day-title">
+
+Tuesday
+
+</h2>
+
+<div class="card-container">
+
+<div class="class-card">
+
+<h3>🔥 HIIT Workout</h3>
+
+<p><strong>Time:</strong> 6:00 AM - 7:00 AM</p>
+
+<p><strong>Trainer:</strong> Vikram Singh</p>
+
+<p>
+
+Seats :
+
+<span id="seat4">
+
+20/20
+
+</span>
+
+</p>
+
+<button
+
+class="book-btn"
+
+onclick="bookClass(
+'Tuesday',
+'HIIT Workout',
+'6:00 AM - 7:00 AM',
+'Vikram Singh',
+'seat4'
+)">
+
+Book Now
+
+</button>
+
+</div>
+
+<div class="class-card">
+
+<h3>🚴 Cycling</h3>
+
+<p><strong>Time:</strong> 8:00 AM - 9:00 AM</p>
+
+<p><strong>Trainer:</strong> Neha Patel</p>
+
+<p>
+
+Seats :
+
+<span id="seat5">
+
+20/20
+
+</span>
+
+</p>
+
+<button
+
+class="book-btn"
+
+onclick="bookClass(
+'Tuesday',
+'Cycling',
+'8:00 AM - 9:00 AM',
+'Neha Patel',
+'seat5'
+)">
+
+Book Now
+
+</button>
+
+</div>
+
+<div class="class-card">
+
+<h3>🧘 Pilates</h3>
+
+<p><strong>Time:</strong> 6:00 PM - 7:00 PM</p>
+
+<p><strong>Trainer:</strong> Anjali Mehta</p>
+
+<p>
+
+Seats :
+
+<span id="seat6">
+
+20/20
+
+</span>
+
+</p>
+
+<button
+
+class="book-btn"
+
+onclick="bookClass(
+'Tuesday',
+'Pilates',
+'6:00 PM - 7:00 PM',
+'Anjali Mehta',
+'seat6'
+)">
+
+Book Now
+
+</button>
+
+</div>
+
+</div>
+<!-- ================= WEDNESDAY ================= -->
+
+<h2 class="day-title">Wednesday</h2>
+
+<div class="card-container">
+
+    <div class="class-card">
+        <h3>🏋️ Strength Training</h3>
+        <p><strong>Time:</strong> 6:00 AM - 7:00 AM</p>
+        <p><strong>Trainer:</strong> Arjun Singh</p>
+        <p>Seats : <span id="seat7">20/20</span></p>
+
+        <button class="book-btn"
+        onclick="bookClass('Wednesday','Strength Training','6:00 AM - 7:00 AM','Arjun Singh','seat7')">
+
+            Book Now
+
+        </button>
+
+    </div>
+
+    <div class="class-card">
+        <h3>💃 Zumba</h3>
+        <p><strong>Time:</strong> 8:00 AM - 9:00 AM</p>
+        <p><strong>Trainer:</strong> Neha Patel</p>
+        <p>Seats : <span id="seat8">20/20</span></p>
+
+        <button class="book-btn"
+        onclick="bookClass('Wednesday','Zumba','8:00 AM - 9:00 AM','Neha Patel','seat8')">
+
+            Book Now
+
+        </button>
+
+    </div>
+
+    <div class="class-card">
+        <h3>🥊 Boxing Fitness</h3>
+        <p><strong>Time:</strong> 6:00 PM - 7:00 PM</p>
+        <p><strong>Trainer:</strong> Rahul Kumar</p>
+        <p>Seats : <span id="seat9">20/20</span></p>
+
+        <button class="book-btn"
+        onclick="bookClass('Wednesday','Boxing Fitness','6:00 PM - 7:00 PM','Rahul Kumar','seat9')">
+
+            Book Now
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ================= THURSDAY ================= -->
+
+<h2 class="day-title">Thursday</h2>
+
+<div class="card-container">
+
+    <div class="class-card">
+        <h3>🧘 Yoga Advanced</h3>
+        <p><strong>Time:</strong> 6:00 AM - 7:00 AM</p>
+        <p><strong>Trainer:</strong> Priya Sharma</p>
+        <p>Seats : <span id="seat10">20/20</span></p>
+
+        <button class="book-btn"
+        onclick="bookClass('Thursday','Yoga Advanced','6:00 AM - 7:00 AM','Priya Sharma','seat10')">
+
+            Book Now
+
+        </button>
+
+    </div>
+
+    <div class="class-card">
+        <h3>💃 Dance Fitness</h3>
+        <p><strong>Time:</strong> 8:00 AM - 9:00 AM</p>
+        <p><strong>Trainer:</strong> Sneha Reddy</p>
+        <p>Seats : <span id="seat11">20/20</span></p>
+
+        <button class="book-btn"
+        onclick="bookClass('Thursday','Dance Fitness','8:00 AM - 9:00 AM','Sneha Reddy','seat11')">
+
+            Book Now
+
+        </button>
+
+    </div>
+
+    <div class="class-card">
+        <h3>🏃 Sprint Training</h3>
+        <p><strong>Time:</strong> 6:00 PM - 7:00 PM</p>
+        <p><strong>Trainer:</strong> Vikram Singh</p>
+        <p>Seats : <span id="seat12">20/20</span></p>
+
+        <button class="book-btn"
+        onclick="bookClass('Thursday','Sprint Training','6:00 PM - 7:00 PM','Vikram Singh','seat12')">
+
+            Book Now
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ================= FRIDAY ================= -->
+
+<h2 class="day-title">Friday</h2>
+
+<div class="card-container">
+
+    <div class="class-card">
+        <h3>🏋️ CrossFit</h3>
+        <p><strong>Time:</strong> 6:00 AM - 7:00 AM</p>
+        <p><strong>Trainer:</strong> Karthik Raj</p>
+        <p>Seats : <span id="seat13">20/20</span></p>
+
+        <button class="book-btn"
+        onclick="bookClass('Friday','CrossFit','6:00 AM - 7:00 AM','Karthik Raj','seat13')">
+
+            Book Now
+
+        </button>
+
+    </div>
+
+    <div class="class-card">
+        <h3>💪 Functional Training</h3>
+        <p><strong>Time:</strong> 8:00 AM - 9:00 AM</p>
+        <p><strong>Trainer:</strong> Arjun Singh</p>
+        <p>Seats : <span id="seat14">20/20</span></p>
+
+        <button class="book-btn"
+        onclick="bookClass('Friday','Functional Training','8:00 AM - 9:00 AM','Arjun Singh','seat14')">
+
+            Book Now
+
+        </button>
+
+    </div>
+
+    <div class="class-card">
+        <h3>🚴 Spin Class</h3>
+        <p><strong>Time:</strong> 6:00 PM - 7:00 PM</p>
+        <p><strong>Trainer:</strong> Neha Patel</p>
+        <p>Seats : <span id="seat15">20/20</span></p>
+
+        <button class="book-btn"
+        onclick="bookClass('Friday','Spin Class','6:00 PM - 7:00 PM','Neha Patel','seat15')">
+
+            Book Now
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ================= SATURDAY ================= -->
+
+<h2 class="day-title">Saturday</h2>
+
+<div class="card-container">
+
+    <div class="class-card">
+        <h3>🔥 Boot Camp</h3>
+        <p><strong>Time:</strong> 6:00 AM - 7:00 AM</p>
+        <p><strong>Trainer:</strong> Vikram Singh</p>
+        <p>Seats : <span id="seat16">20/20</span></p>
+
+        <button class="book-btn"
+        onclick="bookClass('Saturday','Boot Camp','6:00 AM - 7:00 AM','Vikram Singh','seat16')">
+
+            Book Now
+
+        </button>
+
+    </div>
+
+    <div class="class-card">
+        <h3>🤸 TRX Training</h3>
+        <p><strong>Time:</strong> 8:00 AM - 9:00 AM</p>
+        <p><strong>Trainer:</strong> Rahul Kumar</p>
+        <p>Seats : <span id="seat17">20/20</span></p>
+
+        <button class="book-btn"
+        onclick="bookClass('Saturday','TRX Training','8:00 AM - 9:00 AM','Rahul Kumar','seat17')">
+
+            Book Now
+
+        </button>
+
+    </div>
+
+    <div class="class-card">
+        <h3>🏃 Circuit Training</h3>
+        <p><strong>Time:</strong> 6:00 PM - 7:00 PM</p>
+        <p><strong>Trainer:</strong> Karthik Raj</p>
+        <p>Seats : <span id="seat18">20/20</span></p>
+
+        <button class="book-btn"
+        onclick="bookClass('Saturday','Circuit Training','6:00 PM - 7:00 PM','Karthik Raj','seat18')">
+
+            Book Now
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ================= SUNDAY ================= -->
+
+<h2 class="day-title">Sunday</h2>
+
+<div class="card-container">
+
+    <div class="class-card">
+        <h3>🧘 Meditation</h3>
+        <p><strong>Time:</strong> 6:00 AM - 7:00 AM</p>
+        <p><strong>Trainer:</strong> Anjali Mehta</p>
+        <p>Seats : <span id="seat19">20/20</span></p>
+
+        <button class="book-btn"
+        onclick="bookClass('Sunday','Meditation','6:00 AM - 7:00 AM','Anjali Mehta','seat19')">
+
+            Book Now
+
+        </button>
+
+    </div>
+
+    <div class="class-card">
+        <h3>🤸 Stretching</h3>
+        <p><strong>Time:</strong> 8:00 AM - 9:00 AM</p>
+        <p><strong>Trainer:</strong> Priya Sharma</p>
+        <p>Seats : <span id="seat20">20/20</span></p>
+
+        <button class="book-btn"
+        onclick="bookClass('Sunday','Stretching','8:00 AM - 9:00 AM','Priya Sharma','seat20')">
+
+            Book Now
+
+        </button>
+
+    </div>
+
+    <div class="class-card">
+        <h3>🚶 Recovery Walk</h3>
+        <p><strong>Time:</strong> 6:00 PM - 7:00 PM</p>
+        <p><strong>Trainer:</strong> Rahul Kumar</p>
+        <p>Seats : <span id="seat21">20/20</span></p>
+
+        <button class="book-btn"
+        onclick="bookClass('Sunday','Recovery Walk','6:00 PM - 7:00 PM','Rahul Kumar','seat21')">
+
+            Book Now
+
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- ================= MY BOOKINGS ================= -->
+
+<section class="booking-section">
+
+<h2>My Bookings</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Class</th>
+<th>Booked On</th>
+<th>Day</th>
+<th>Time</th>
+<th>Trainer</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="bookingsTable">
+
+<tr>
+
+<td colspan="7">
+
+No bookings available.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<script src="../js/schedule.js"></script>
+
+</body>
+</html>

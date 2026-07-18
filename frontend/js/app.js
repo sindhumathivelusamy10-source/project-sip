@@ -9,12 +9,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const navItems = document.querySelectorAll(".nav-item");
     const views = document.querySelectorAll(".view");
 
-    // LOGIN
-    loginForm.addEventListener("submit", function(e) {
+    appShell.style.display = "none";
+    authWrap.style.display = "flex";
+
+    // ================= LOGIN =================
+
+    loginForm.addEventListener("submit", function (e) {
+
         e.preventDefault();
 
-        const email = document.getElementById("loginEmail").value;
-        const password = document.getElementById("loginPassword").value;
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value.trim();
 
         if (
             (email === "sindhumathi@gmail.com" && password === "123456") ||
@@ -27,13 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
             loadDashboard(email);
 
         } else {
+
             alert("Invalid Email or Password");
+
         }
+
     });
 
-    // REGISTER
-    if(registerForm){
-        registerForm.addEventListener("submit", function(e){
+    // ================= REGISTER =================
+
+    if (registerForm) {
+
+        registerForm.addEventListener("submit", function (e) {
+
             e.preventDefault();
 
             alert("Registration Successful");
@@ -42,39 +53,42 @@ document.addEventListener("DOMContentLoaded", () => {
             appShell.style.display = "flex";
 
             loadDashboard("newuser@gmail.com");
+
         });
+
     }
 
-    // LOGOUT
+    // ================= LOGOUT =================
+
     const logoutBtn = document.getElementById("logoutBtn");
 
-    if(logoutBtn){
+    if (logoutBtn) {
+
         logoutBtn.addEventListener("click", () => {
+
             appShell.style.display = "none";
             authWrap.style.display = "flex";
+
         });
+
     }
 
-    // SIDEBAR NAVIGATION
+    // ================= SIDEBAR =================
+
     navItems.forEach(item => {
 
         item.addEventListener("click", () => {
 
             const view = item.dataset.view;
 
-            if(!view) return;
+            if (!view) return;
 
             navItems.forEach(i => i.classList.remove("active"));
             item.classList.add("active");
 
             views.forEach(v => v.classList.remove("active"));
 
-            const selected =
-                document.getElementById(`view-${view}`);
-
-            if(selected){
-                selected.classList.add("active");
-            }
+            document.getElementById("view-" + view).classList.add("active");
 
             document.getElementById("viewTitle").textContent =
                 item.textContent.trim();
@@ -83,15 +97,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    // DASHBOARD FUNCTION
-    function loadDashboard(email){
+    // ================= DASHBOARD =================
+
+    function loadDashboard(email) {
 
         const name =
             email === "sindhumathi@gmail.com"
-            ? "Sindhumathi Velusamy"
-            : "Ravi Kumar";
+                ? "Sindhumathi Velusamy"
+                : "Ravi Kumar";
 
-        // Scoreboard
+        document.getElementById("viewSubtitle").textContent =
+            "Welcome back, " + name;
+
         document.getElementById("memberScoreboard").innerHTML = `
             <div class="stat">
                 <span class="num">12</span>
@@ -113,8 +130,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span class="label">Membership</span>
             </div>
         `;
+                // ================= MEMBERSHIP =================
 
-        // Membership
         document.getElementById("dashPlanBadge").textContent =
             "Elite Membership";
 
@@ -125,7 +142,8 @@ document.addEventListener("DOMContentLoaded", () => {
             <p><strong>Valid Until:</strong> 31 Dec 2026</p>
         `;
 
-        // Upcoming Classes
+        // ================= UPCOMING CLASSES =================
+
         document.getElementById("dashUpcoming").innerHTML = `
             <ul>
                 <li>Yoga - Monday - 6:00 AM</li>
@@ -135,54 +153,57 @@ document.addEventListener("DOMContentLoaded", () => {
             </ul>
         `;
 
-        // Notifications
+        // ================= NOTIFICATIONS =================
+
         document.getElementById("notifList").innerHTML = `
             <p>Membership renewed successfully.</p>
-            <p>Yoga class booked for Monday.</p>
+            <p>Yoga class booked successfully.</p>
             <p>Congratulations! 12 classes completed.</p>
         `;
 
-        // Schedule
+        // ================= CLASS SCHEDULE =================
+
         document.getElementById("scheduleList").innerHTML = `
-            <div class="card">
-                <h3>Yoga</h3>
-                <p>Monday - 6:00 AM</p>
-            </div>
 
-            <div class="card">
-                <h3>Cardio Blast</h3>
-                <p>Wednesday - 7:00 AM</p>
-            </div>
+        <div class="card">
+            <h3>Yoga</h3>
+            <p>📅 Monday</p>
+            <p>🕒 6:00 AM</p>
+            <p>👨‍🏫 Trainer: Priya Sharma</p>
+            <button class="btn btn-primary"
+                onclick="bookClass('Yoga')">
+                Book Now
+            </button>
+        </div>
 
-            <div class="card">
-                <h3>Strength Training</h3>
-                <p>Friday - 6:30 PM</p>
-            </div>
+        <div class="card">
+            <h3>Cardio Blast</h3>
+            <p>📅 Wednesday</p>
+            <p>🕒 7:00 AM</p>
+            <p>👨‍🏫 Trainer: Rahul Kumar</p>
+            <button class="btn btn-primary"
+                onclick="bookClass('Cardio Blast')">
+                Book Now
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>Strength Training</h3>
+            <p>📅 Friday</p>
+            <p>🕒 6:30 PM</p>
+            <p>👨‍🏫 Trainer: Arjun Singh</p>
+            <button class="btn btn-primary"
+                onclick="bookClass('Strength Training')">
+                Book Now
+            </button>
+        </div>
+
         `;
 
-        // Bookings
-        document.getElementById("bookingsTable").innerHTML = `
-            <tr>
-                <td>Yoga</td>
-                <td>21 Jul 2026</td>
-                <td>6:00 AM</td>
-                <td>Priya Sharma</td>
-                <td>Confirmed</td>
-                <td>-</td>
-            </tr>
+        // ================= WORKOUT =================
 
-            <tr>
-                <td>Cardio Blast</td>
-                <td>23 Jul 2026</td>
-                <td>7:00 AM</td>
-                <td>Rahul Kumar</td>
-                <td>Confirmed</td>
-                <td>-</td>
-            </tr>
-        `;
-
-        // Workout
         document.getElementById("workoutList").innerHTML = `
+
             <div class="card">
                 <h3>Workout Plan</h3>
                 <p>Monday - Chest & Triceps</p>
@@ -191,19 +212,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p>Thursday - Legs</p>
                 <p>Friday - Shoulders</p>
             </div>
+
         `;
 
-        // Nutrition
+        // ================= NUTRITION =================
+
         document.getElementById("nutritionList").innerHTML = `
+
             <div class="card">
                 <h3>Nutrition Plan</h3>
-                <p>Breakfast - Oats and Milk</p>
-                <p>Lunch - Rice and Chicken</p>
-                <p>Dinner - Salad and Protein Shake</p>
+                <p>Breakfast - Oats & Milk</p>
+                <p>Lunch - Rice & Chicken</p>
+                <p>Dinner - Salad & Protein Shake</p>
             </div>
-        `;
 
-        // Progress
+        `;
+                // ================= PROGRESS =================
+
         document.getElementById("progressTable").innerHTML = `
             <tr>
                 <td>01 Jan 2026</td>
@@ -220,7 +245,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </tr>
         `;
 
-        // Billing
+        // ================= BILLING =================
+
         document.getElementById("billingPlanInfo").innerHTML = `
             <p><strong>Plan:</strong> Elite Membership</p>
             <p><strong>Amount:</strong> ₹12,000</p>
@@ -236,12 +262,110 @@ document.addEventListener("DOMContentLoaded", () => {
             </tr>
         `;
 
-        // Profile
+        // ================= PROFILE =================
+
         document.getElementById("profileInfo").innerHTML = `
             <p><strong>Name:</strong> ${name}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Phone:</strong> 9876543210</p>
             <p><strong>Membership:</strong> Elite Membership</p>
         `;
+
+    } // End of loadDashboard()
+
+}); // End of DOMContentLoaded
+// ================= BOOK CLASS =================
+
+window.bookClass = function (className) {
+
+    const bookingsTable = document.getElementById("bookingsTable");
+
+    // Remove Loading row
+    if (bookingsTable.innerHTML.includes("Loading")) {
+        bookingsTable.innerHTML = "";
     }
-});
+
+    const bookedOn = new Date().toLocaleDateString("en-GB");
+
+    let trainer = "";
+    let time = "";
+    let classDate = "";
+
+    switch (className) {
+
+        case "Yoga":
+            trainer = "Priya Sharma";
+            time = "6:00 AM";
+            classDate = "21 Jul 2026";
+            break;
+
+        case "Cardio Blast":
+            trainer = "Rahul Kumar";
+            time = "7:00 AM";
+            classDate = "23 Jul 2026";
+            break;
+
+        case "Strength Training":
+            trainer = "Arjun Singh";
+            time = "6:30 PM";
+            classDate = "25 Jul 2026";
+            break;
+
+        default:
+            trainer = "Trainer";
+            time = "-";
+            classDate = "-";
+    }
+
+    bookingsTable.insertAdjacentHTML("beforeend", `
+        <tr>
+            <td>${className}</td>
+            <td>${bookedOn}</td>
+            <td>${classDate}</td>
+            <td>${time}</td>
+            <td>${trainer}</td>
+            <td>
+                <span style="color:green;font-weight:bold;">
+                    Confirmed
+                </span>
+            </td>
+            <td>
+                <button
+                    class="btn btn-danger btn-sm"
+                    onclick="cancelBooking(this)">
+                    Cancel
+                </button>
+            </td>
+        </tr>
+    `);
+
+    alert(className + " booked successfully!");
+
+};
+
+
+// ================= CANCEL BOOKING =================
+
+window.cancelBooking = function (button) {
+
+    if (confirm("Are you sure you want to cancel this booking?")) {
+
+        button.closest("tr").remove();
+
+        const bookingsTable = document.getElementById("bookingsTable");
+
+        if (bookingsTable.rows.length === 0) {
+
+            bookingsTable.innerHTML = `
+                <tr>
+                    <td colspan="7" class="muted">
+                        No bookings available.
+                    </td>
+                </tr>
+            `;
+        }
+
+        alert("Booking Cancelled Successfully");
+    }
+
+};
